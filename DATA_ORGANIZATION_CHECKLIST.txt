@@ -1,0 +1,1090 @@
+DATA ORGANIZATION CHECKLIST - MILESTONE 8
+==========================================
+
+COMPREHENSIVE VERIFICATION GUIDE FOR DATA LIFECYCLE MANAGEMENT
+Covering raw data protection, processed data traceability, and output organization
+
+** LEARNING OBJECTIVE: **
+Demonstrate understanding of how to protect raw data, maintain clean processing pipelines,
+organize output artifacts, and enable reproducible data science workflows.
+
+** ESTIMATED COMPLETION TIME: **
+- Quick Review: 30 minutes
+- Thorough Assessment: 1.5 hours
+- Video Recording: ~2 minutes
+- Total Milestone: 2-3 hours
+
+================================================================================
+PART A: RAW DATA PROTECTION - VERIFY YOU UNDERSTAND IMMUTABILITY
+================================================================================
+
+Review: "Why is raw data immutable?"
+
+□ Can I explain why raw data should never be modified?
+  - Not: "Just because we should"
+  - Yes: "Because [specific reason about reproducibility/audit trail]"
+
+□ Do I understand the consequences of modifying raw data?
+  - Broken reproducibility
+  - Lost audit trail
+  - No backup of original
+  - Team cannot verify work
+
+□ Can I identify examples of RAW DATA:
+  □ CSV from database export (YES - raw)
+  □ API response dump (YES - raw)
+  □ CSV after removing nulls (NO - processed)
+  □ CSV after deduplication (NO - processed)
+  □ Joined datasets (NO - processed)
+
+□ Can I identify what raw data is NOT:
+  □ Data with duplicates removed (NO)
+  □ Data with missing values filled (NO)
+  □ Data that's been merged (NO)
+  □ Data that's been normalized (NO)
+
+SELF-ASSESSMENT:
+  ☐ Confused about immutability (Review immutability section)
+  ☐ Understand basic concept
+  ☐ Can explain with examples
+  ☐ Could teach someone else
+
+EVIDENCE: Can you point to a "raw" folder in a project? What makes it raw?
+_________________________________________________________________________
+
+
+================================================================================
+PART B: RAW DATA FOLDER VERIFICATION - CHECK YOUR RAW/ FOLDER
+================================================================================
+
+Physical Folder Check:
+
+□ Do you have a data/raw/ folder?
+
+□ Does raw/ contain ONLY original files (no duplicates, no v1/v2)?
+
+□ Are all raw files NEVER modified after receipt?
+  ✓ Can I verify this in git history (no edits to raw files)?
+
+□ Is there a DATA_SOURCES.md documenting:
+  □ Where each file came from
+  □ When it was downloaded/exported
+  □ How to re-export if needed
+  □ Contact person for questions
+  □ Data quality notes
+  □ Update frequency
+
+□ For each raw data file, can I answer:
+  □ What system did it come from?
+  □ When was it exported?
+  □ What does it represent?
+  □ What are the known issues?
+  □ How many records total?
+
+□ Is there a README.md in raw/ explaining:
+  □ Why this folder is immutable
+  □ The rule about never modifying
+  □ Examples of what to do/not do
+  □ How to protect raw files (read-only)
+  □ How to access if lost
+
+SELF-ASSESSMENT:
+  ☐ No raw data folder yet
+  ☐ Folder exists but not documented
+  ☐ DATA_SOURCES.md started
+  ☐ Complete documentation present
+
+EVIDENCE: Can you show your data/raw/DATA_SOURCES.md?
+_________________________________________________________________________
+
+
+================================================================================
+PART C: PROCESSED DATA ORGANIZATION - VERIFY PROCESSING PIPELINE
+================================================================================
+
+File Naming Convention:
+
+□ Are processed files named clearly (showing transformation)?
+  ✓ Examples:
+    - sales_cleaned.csv (✓ clear)
+    - sales_merged_customers.csv (✓ clear)
+    - features_engineered.csv (✓ clear)
+  ✗ Examples:
+    - data.csv (✗ unclear)
+    - v2.csv (✗ vague)
+    - final.csv (✗ ambiguous)
+
+□ Are raw and processed in DIFFERENT folders?
+  - Raw: data/raw/
+  - Processed: data/processed/
+  Not mixed together!
+
+□ For each processed file, is there a metadata file?
+  - File: data/processed/sales_cleaned.csv
+  - Metadata: data/processed/sales_cleaned_metadata.txt
+    (or _metadata.json for larger projects)
+
+Metadata Content Check:
+
+□ Does each metadata file document:
+  □ Source file (which raw file used)
+  □ Processing date/time
+  □ Processing script used
+  □ Transformations applied (exactly what)
+  □ Input record count
+  □ Output record count
+  □ Records changed (how many, why)
+  □ Validation checks (what was verified)
+  □ Author/contact person
+
+Data Dictionary:
+
+□ Is there a DATA_DICTIONARY.md or similar?
+  For each column:
+  □ Column name
+  □ Data type
+  □ Human-readable description
+  □ Example values
+  □ Valid ranges
+  □ Null handling
+
+Reproducibility:
+
+□ Can I regenerate processed data from raw?
+  □ Processing script exists
+  □ Processing script is documented
+  □ Script documented in metadata
+  □ Code uses same raw file specified
+  □ Output matches original (or very close)
+
+SELF-ASSESSMENT:
+  ☐ No processed folder yet
+  ☐ Files exist but no metadata
+  ☐ Some metadata present
+  ☐ Comprehensive documentation
+
+EVIDENCE: Show your data/processed/ folder structure and one metadata file
+_________________________________________________________________________
+
+
+================================================================================
+PART D: SEPARATION OF CONCERNS - VERIFY DATA FLOW
+================================================================================
+
+Physical Separation:
+
+□ Are data files completely separate from code files?
+  Example structure:
+  ✓ data/
+     ├── raw/
+     └── processed/
+    scripts/
+
+  ✗ WRONG:
+    ├── sales.csv (data mixed with code)
+    ├── analysis.py
+    └── processed_sales.csv
+
+□ Is processed data separate from output artifacts?
+  ✓ Good:
+    ├── data/processed/features.csv
+    └── outputs/models/model.pkl
+
+  ✗ Bad:
+    ├── data/processed/features.csv
+    ├── data/processed/model.pkl (model != dataset)
+    └── data/processed/plot.png (visualization != dataset)
+
+Output Organization:
+
+□ Are outputs organized by PURPOSE (not by date)?
+  outputs/
+  ├── models/          (trained ML models)
+  ├── visualizations/  (plots and charts)
+  └── reports/         (analysis summaries)
+
+  Not:
+  outputs/
+  ├── 2024_01_15/
+  ├── 2024_01_16/
+  └── 2024_01_17/
+
+File Types Verification:
+
+□ Can I describe the difference:
+  
+  RAW data file:
+  - Type: CSV, JSON, Excel
+  - Purpose: Original from source
+  - State: Unmodified
+  - Example: sales_transactions_raw.csv
+
+  PROCESSED data file:
+  - Type: CSV, JSON
+  - Purpose: For analysis/modeling
+  - State: Cleaned, transformed
+  - Example: features_engineered.csv
+
+  OUTPUT artifact:
+  - Type: .pkl (models), .png (viz), .html (reports)
+  - Purpose: Results/deliverables
+  - State: Generated by code
+  - Example: model_v2.pkl, sales_trend.png
+
+SELF-ASSESSMENT:
+  ☐ Mixed together (need reorganization)
+  ☐ Files separated but not clearly organized
+  ☐ Good separation, somewhat organized
+  ☐ Clear separation by type and purpose
+
+EVIDENCE: Show your folder tree (ls -R or tree command)
+_________________________________________________________________________
+
+
+================================================================================
+PART E: DATA QUALITY DOCUMENTATION - VERIFY TRACEABILITY
+================================================================================
+
+For each dataset, can I answer:
+
+□ WHERE did this data come from?
+  - Raw source system documented
+  - Export date recorded
+  - Contact person identified
+
+□ WHAT was done to this data?
+  - Processing steps listed
+  - Code that did processing identified
+  - Changes documented (what changed, how many records)
+
+□ WHEN was this created?
+  - Exact timestamp recorded
+  - Git history has record
+  - Metadata file dated
+
+□ WHO did this?
+  - Author recorded
+  - Contact info available
+  - Team knows who to ask
+
+□ WHY was it done this way?
+  - Reasoning documented
+  - Alternatives considered (if applicable)
+  - Trade-offs explained
+
+Null Handling Documentation:
+
+□ Can I document how nulls are handled:
+  Example:
+  - Column A: Nulls filled with median
+  - Column B: Rows with nulls removed
+  - Column C: Nulls filled with "Unknown"
+  
+  Not acceptable:
+  - "Nulls handled"
+  - "Cleaned"
+  - No documentation
+
+Missing Values Verification:
+
+□ For processed data, I can report:
+  - Before processing: X total nulls
+  - Processing: Applied Y strategy
+  - After processing: Z nulls remaining
+  - Documentation: Where this is recorded
+
+Outlier Handling:
+
+□ Can I document how outliers are handled:
+  - Detection method (IQR, z-score)
+  - Threshold used
+  - Number of records affected
+  - Records removed vs. modified
+
+Data Validation:
+
+□ For each dataset, was validation applied:
+  □ Date ranges checked
+  □ Value ranges checked
+  □ Data types verified
+  □ Required fields checked
+  □ Categorical values validated
+
+SELF-ASSESSMENT:
+  ☐ No documentation yet
+  ☐ Minimal documentation (5-point coverage)
+  ☐ Good documentation (most 5 points covered)
+  ☐ Comprehensive (all 5 points with detail)
+
+EVIDENCE: Show your metadata file for a processed dataset
+_________________________________________________________________________
+
+
+================================================================================
+PART F: OUTPUT ORGANIZATION - VERIFY ARTIFACT STORAGE
+================================================================================
+
+Folder Structure:
+
+□ Do I have outputs/ folder organized by type:
+  outputs/
+  ├── models/           (trained ML models)
+  ├── visualizations/   (plots, charts)
+  └── reports/          (analysis summaries)
+
+Models Folder:
+
+□ For each model, can I find:
+  □ Model file (.pkl, .h5, .joblib)
+  □ Metadata file (when trained, performance)
+  □ Feature list (what features used, in order)
+  □ Hyperparameters (settings used)
+  □ Performance metrics (accuracy, etc.)
+
+Visualizations Folder:
+
+□ For each visualization:
+  □ Clear filename (can tell what it shows)
+  □ High resolution when appropriate
+  □ Filename indicates content + type
+    Examples:
+    ✓ sales_trend_monthly.png
+    ✓ customer_segments_scatter.pdf
+    ✗ plot.png
+    ✗ figure_1.png
+
+Reports Folder:
+
+□ For each report:
+  □ Meaningful filename (topic_date.html)
+  □ Data source documented
+  □ Generation timestamp recorded
+  □ Can tell when it was created
+  □ Can locate underlying data
+
+File Naming Convention:
+
+□ Can I describe the naming pattern:
+  Format: [content]_[subtype]_[date|version].[extension]
+  
+  Examples:
+  - model_xgboost_v2.pkl
+  - sales_trend_monthly.png
+  - forecast_2024_02.csv
+  - report_analysis_2024_01.html
+
+NOT Acceptable:
+  - plot.png (too vague)
+  - data.csv (too generic)
+  - output_1.pkl (meaningless)
+  - latest.csv (unclear which version)
+
+Size and Reproducibility:
+
+□ Can I regenerate all outputs from processed data?
+  - Models: Run training script
+  - Visualizations: Run plotting script
+  - Reports: Regenerate from analysis
+
+□ Are outputs version controlled appropriately:
+  - Small files (< 1 MB): Commit to git
+  - Large files (> 1 MB): Don't commit, regenerate
+  - Models: Git-lfs or external storage
+
+SELF-ASSESSMENT:
+  ☐ No outputs organized
+  ☐ Outputs mixed together
+  ☐ Partially organized by type
+  ☐ Well organized by purpose
+
+EVIDENCE: Show your outputs/ folder structure
+_________________________________________________________________________
+
+
+================================================================================
+PART G: NAMING CONVENTIONS - VERIFY CONSISTENCY
+================================================================================
+
+Raw Data Files:
+
+□ Are raw files named to indicate source?
+  ✓ Good:
+    - sales_data_2024_01_15.csv
+    - customer_profiles_raw.csv
+    - api_response_products.json
+
+  ✗ Bad:
+    - data.csv
+    - raw.csv
+    - file_01.csv
+
+Processed Data Files:
+
+□ Are processed files named to indicate transformation?
+  ✓ Good:
+    - sales_cleaned.csv
+    - features_engineered.csv
+    - customers_merged.csv
+
+  ✗ Bad:
+    - sales.csv (unclear if processed)
+    - data_v2.csv (what changed?)
+    - final.csv (ambiguous)
+
+Versions in Naming:
+
+□ When creating versions, is naming clear?
+  ✓ Good:
+    - features_v1_initial.csv
+    - features_v2_temporal_added.csv
+    - features_v3_optimized.csv
+
+  ✗ Bad:
+    - features.csv
+    - features_v2.csv (what's different?)
+    - features_final.csv (which one is final?)
+
+Output Files:
+
+□ Are outputs named descriptively?
+  ✓ Good:
+    - model_kmeans_clustering_v2.pkl
+    - sales_trend_2024_monthly.png
+    - forecast_q1_2024.csv
+
+  ✗ Bad:
+    - model.pkl
+    - plot.png
+    - output.csv
+
+Consistency:
+
+□ Is naming convention consistent across entire project?
+  - All raw files follow same pattern
+  - All processed files follow same pattern
+  - All output files follow same pattern
+
+SELF-ASSESSMENT:
+  ☐ Naming is random and inconsistent
+  ☐ Some naming convention attempted
+  ☐ Mostly consistent, few exceptions
+  ☐ Consistent naming throughout
+
+EVIDENCE: Show 5 example filenames from your project
+_________________________________________________________________________
+
+
+================================================================================
+PART H: VERSION CONTROL INTEGRATION - VERIFY GIT USAGE
+================================================================================
+
+Raw Data in Git:
+
+□ Is raw data tracked appropriately:
+  - Small files (< 100 MB): Tracked
+  - Large files: Using git-lfs or documented external storage
+  - Gitignore: Specifies which raw files kept/excluded
+
+Processed Data in Git:
+
+□ Processed data handling:
+  - Small files (< 100 MB): Tracked
+  - Can regenerate from scripts: Not committed (scripts kept)
+
+Git History:
+
+□ Can I see in git log:
+  - When data files were added
+  - What changes were made
+  - Who made changes
+  - Commit messages explaining why
+
+Scripts in Git:
+
+□ Processing scripts tracked:
+  - clean_sales_data.py (in git)
+  - process_transactions.py (in git)
+  - train_models.py (in git)
+
+□ All imports documented:
+  - requirements.txt present
+  - Versions specified
+  - Can install: pip install -r requirements.txt
+
+Metadata:
+
+□ Metadata files tracked:
+  - *_metadata.txt files in git
+  - DATA_SOURCES.md in git
+  - README files in git
+
+SELF-ASSESSMENT:
+  ☐ Not using git for data management
+  ☐ Using git but inconsistently
+  ☐ Clear git strategy for files
+  ☐ Optimized git workflow
+
+EVIDENCE: Run git log and show 2-3 recent commits
+_________________________________________________________________________
+
+
+================================================================================
+PART I: REPRODUCIBILITY TEST - VERIFY YOU CAN REGENERATE
+================================================================================
+
+The Ultimate Test:
+
+□ Can a teammate clone your repo and reproduce results?
+
+Specific Test 1: Run Processing Script
+
+□ Step 1: Clone the project
+  git clone [your-repo]
+  cd [project]
+
+□ Step 2: Check raw data exists
+  ls data/raw/
+  # Should show raw data files
+
+□ Step 3: Run processing script
+  python scripts/clean_sales_data.py
+  # Should complete without errors
+
+□ Step 4: Verify processed data created
+  ls data/processed/
+  # Should show cleaned data file
+
+□ Step 5: Check metadata
+  cat data/processed/*_metadata.txt
+  # Should explain what was cleaned
+
+REPRODUCIBILITY CHECKLIST:
+  □ Scripts are self-contained (no hardcoded paths)
+  □ Scripts use relative paths (data/raw, not /users/john/data/raw)
+  □ Scripts have helpful error messages
+  □ Dependencies documented (requirements.txt)
+  □ Script finishes cleanly without errors
+
+Specific Test 2: Re-export Raw Data
+
+□ If raw data can change:
+  □ Can I re-export from source (following DATA_SOURCES.md)?
+  □ Would results match original?
+  □ Is procedure documented?
+
+Specific Test 3: Regenerate Models/Visualizations
+
+□ Can I run:
+  python scripts/train_models.py
+  # Should create models in outputs/
+
+□ Check outputs created:
+  ls outputs/models/
+  ls outputs/visualizations/
+
+REPRODUCIBILITY SCORE:
+  ☐ Cannot run scripts at all (0%)
+  ☐ Scripts run with modifications (25%)
+  ☐ Scripts run with minor errors (50%)
+  ☐ Scripts run cleanly (75%)
+  ☐ Complete reproducibility (100%)
+
+EVIDENCE: Run a script and show output
+_________________________________________________________________________
+
+
+================================================================================
+PART J: COMMON MISTAKES - CAN YOU IDENTIFY THEM?
+================================================================================
+
+Mistake 1: Modifying Raw Data
+
+Scenario: You load raw data and clean it:
+```python
+df = pd.read_csv('data/raw/sales.csv')
+df.drop_duplicates(inplace=True)
+df.to_csv('data/raw/sales.csv')  # ← BIG MISTAKE
+```
+
+□ Can I identify why this is wrong?
+  - Overwrites original data
+  - No backup if mistake made
+  - Cannot prove data authenticity
+  - Defeats purpose of keeping raw
+
+□ Can I correct it?
+  - Load from data/raw/
+  - Create new dataframe:  df_clean = df.drop_duplicates()
+  - Save to data/processed/: df_clean.to_csv('data/processed/sales_cleaned.csv')
+
+Mistake 2: Mixing Outputs with Data
+
+Scenario: Project structure:
+```
+data/
+├── sales.csv
+├── model.pkl        ← Model in data folder!
+└── plot.png         ← Visualization in data folder!
+```
+
+□ Can I identify organizational problem?
+  - Outputs (models, plots) mixed with data
+  - No separation of concerns
+  - Hard to find things
+  - Unclear what is data vs. result
+
+□ Can I reorganize it?
+  outputs/
+  ├── models/model.pkl
+  └── visualizations/plot.png
+
+Mistake 3: Unclear File Names
+
+Scenario: Your processed folder has:
+```
+data/processed/
+├── data.csv
+├── data_v2.csv
+├── data_final.csv
+├── cleaned.csv
+└── output.csv
+```
+
+□ Can I identify the problem?
+  - Names don't tell you what's inside
+  - Unclear which is "final"
+  - Multiple "versions" but purpose unknown
+  - Cannot track evolution
+
+□ Can I improve naming?
+  - sales_cleaned.csv (clear: cleaned)
+  - sales_merged_customers_v2.csv (clear: merged + version)
+  - customer_features_engineered.csv (clear: features added)
+
+Mistake 4: No Documentation
+
+Scenario: Your processed data folder:
+```
+data/processed/
+├── features.csv
+├── train.csv
+├── test.csv
+```
+
+No metadata, no README, no documentation.
+
+□ Can I identify the problem?
+  - Cannot tell where data came from
+  - Unknown what transformations applied
+  - No reproducibility
+  - New team member confused
+
+□ Can I add documentation?
+  - Create features_metadata.txt
+  - Create train_metadata.txt, test_metadata.txt
+  - Create README.md in processed/
+  - Document split strategy
+
+Mistake 5: Data Modified Unexpectedly
+
+Scenario: Raw data downloaded 2 weeks ago:
+- 100,000 records
+- Used in analysis
+- Now downloading again
+- 95,000 records
+- Results don't match!
+
+□ Can I identify the issue?
+  - Source data changed
+  - Analysis based on outdated raw data
+  - No backup of original
+  - Cannot reproduce original results
+
+□ Can I prevent this?
+  - Download with date: sales_2024_01_15.csv
+  - Document: "This analysis uses 2024_01_15 extract"
+  - Keep multiple date versions if critical
+  - Version control snapshots
+
+Mistake 6: Unclear Processing Steps
+
+Scenario: Someone asks:
+"I need to use this processed data. What was done to it?"
+
+Your answer:
+"I cleaned it"
+
+Bad answer! Unclear.
+
+□ Can I provide better answer?
+  - Removed X duplicate rows (identifiers: [list])
+  - Filled Y null values using [strategy]
+  - Modified Z records due to [reason]
+  - Result: 95,000 records from 100,000
+  - Metadata file: See processed_metadata.txt
+
+IDENTIFYING MISTAKES SCORE:
+  ☐ Could not identify issues (0/6)
+  ☐ Identified 1-2 mistakes (awareness starting)
+  ☐ Identified 3-4 mistakes (good understanding)
+  ☐ Identified 5-6 mistakes (expert level)
+
+EVIDENCE: Show an example from your project and explain  
+_________________________________________________________________________
+
+
+================================================================================
+PART K: COLLABORATION CHECK - VERIFY TEAM UNDERSTANDING
+================================================================================
+
+Teammate Test:
+
+□ Can a teammate understand your data organization:
+  - Find raw data immediately (data/raw/)
+  - Understand it's immutable (README explains)
+  - See processing pipeline (data/processed/ → scripts/)
+  - Find outputs (outputs/ organized by type)
+
+Documentation for Collaboration:
+
+□ Complete README hierarchy:
+  □ Project README.md (overall structure)
+  □ data/raw/README.md (raw data rules)
+  □ data/raw/DATA_SOURCES.md (where data from)
+  □ data/processed/README.md (how data was created)
+  □ outputs/README.md (what outputs mean)
+  □ outputs/models/README.md (how to use models)
+  □ scripts/README.md (how to run scripts)
+
+□ Can my teammate:
+  □ Understand the folder structure in 5 minutes
+  □ Know not to modify raw data
+  □ Find documentation without asking
+  □ Regenerate outputs if needed
+  □ Ask questions knowing exactly what to ask
+
+Communication:
+
+□ If someone asks "What is this data?":
+  Can I explain:
+  - Where it came from
+  - What transformations were applied
+  - When it was created
+  - How to use it
+  - Who to contact with questions
+
+COLLABORATION SCORE:
+  ☐ Poor (teammate confused immediately)
+  ☐ Okay (teammate confused after 10 minutes)
+  ☐ Good (teammate understands after 20 minutes)
+  ☐ Excellent (teammate understands immediately)
+
+EVIDENCE: Have a teammate review your structure and explain it
+_________________________________________________________________________
+
+
+================================================================================
+PART L: VIDEO PREPARATION - CHECK YOU'RE READY TO RECORD
+================================================================================
+
+Video Content Checklist:
+
+□ Can you demonstrate each of these topics (30 seconds each):
+
+  1. Raw Data Protection (30s)
+     - Show data/raw/ folder
+     - Explain immutability rule
+     - Show README.md
+     - Show DATA_SOURCES.md
+
+  2. Processed Data Organization (45s)
+     - Show data/processed/ folder
+     - Explain file naming
+     - Show metadata file
+     - Explain traceability
+
+  3. Output Organization (25s)
+     - Show outputs/ folder structure
+     - Explain models/ vs visualizations/ vs reports/
+     - Show example files
+
+  4. Reproducibility (30s)
+     - Run a script from clean state
+     - Show outputs generated
+     - Explain this proves reproducibility
+
+Equipment Check:
+
+□ Do I have:
+  □ Screen recording software (OBS, Quicktime, etc.)
+  □ Microphone (clear audio)
+  □ Quiet environment
+  □ Camera or screen capture
+  □ Project set up and ready
+  □ Example files visible
+
+Scenario Preparation:
+
+□ Can I answer this scenario in 30 seconds:
+  "A teammate cannot reproduce your results because the raw data appears to be 
+   altered and outputs are mixed with input files. What data organization mistakes 
+   likely caused this, and how would separating raw, processed, and output data 
+   prevent the issue?"
+
+  Your answer should cover:
+  - Raw data shouldn't be modified
+  - Stored in separate folders
+  - Traceability through metadata
+  - Clear organization enables reproducibility
+  - Team trust
+
+PREPARATION SCORE:
+  ☐ Not ready yet
+  ☐ Needs more practice
+  ☐ Ready but nervous
+  ☐ Ready and confident
+
+EVIDENCE: Do a practice explanation (don't record, just explain)
+_________________________________________________________________________
+
+
+================================================================================
+PART M: SELF-ASSESSMENT - OVERALL LEARNING EVALUATION
+================================================================================
+
+Knowledge Assessment:
+
+Rate your understanding (1 = confused, 5 = expert):
+
+Raw Data Protection:
+  Why immutable  ☐1  ☐2  ☐3  ☐4  ☐5
+  How to protect ☐1  ☐2  ☐3  ☐4  ☐5
+  Documentation  ☐1  ☐2  ☐3  ☐4  ☐5
+
+Processing Pipeline:
+  Data flow      ☐1  ☐2  ☐3  ☐4  ☐5
+  Transformations☐1  ☐2  ☐3  ☐4  ☐5
+  Metadata       ☐1  ☐2  ☐3  ☐4  ☐5
+
+Output Organization:
+  Folder structure ☐1  ☐2  ☐3  ☐4  ☐5
+  File naming      ☐1  ☐2  ☐3  ☐4  ☐5
+  Artifact types   ☐1  ☐2  ☐3  ☐4  ☐5
+
+Reproducibility:
+  Script execution ☐1  ☐2  ☐3  ☐4  ☐5
+  Regeneration     ☐1  ☐2  ☐3  ☐4  ☐5
+  Verification     ☐1  ☐2  ☐3  ☐4  ☐5
+
+Overall: Sum scores / 30 = ____/5.0 average
+
+Practical Skills:
+
+Can you:
+□ Create data/raw/ → data/processed/ → outputs/ structure
+□ Protect raw data from accidental modification
+□ Document data sources completely
+□ Create metadata for processed data
+□ Organize outputs by purpose
+□ Write clear README files
+□ Trace data lineage (raw → processed → output)
+□ Regenerate outputs from scripts
+□ Explain data organization to teammates
+
+Skills Assessment:
+  ☐ Need more practice (< 50% can do)
+  ☐ Developing (50-70% can do)
+  ☐ Competent (70-85% can do)
+  ☐ Proficient (90%+ can do)
+
+Confidence Level:
+
+I feel ______% confident in my data organization practices.
+
+Target: 80%+ confidence before recording video
+
+Ready for Video?
+
+Based on your self-assessment above:
+  ☐ Not yet ready (need more study)
+  ☐ Somewhat ready (need practice)
+  ☐ Ready (confident)
+  ☐ Very ready (excited to record)
+
+_________________________________________________________________________
+
+
+================================================================================
+PART N: FINAL VERIFICATION - SIGN-OFF CHECKLIST
+================================================================================
+
+Before Submitting Milestone:
+
+□ Raw Data Protection
+  ☐ data/raw/ folder exists
+  ☐ Files in raw/ are NEVER modified
+  ☐ README.md in raw/ explains immutability
+  ☐ DATA_SOURCES.md documents all sources
+
+□ Processed Data Organization
+  ☐ data/processed/ folder exists
+  ☐ Files clearly named showing transformation
+  ☐ Metadata files created for each dataset
+  ☐ Data dictionary or schema documentation
+  ☐ README.md explains pipeline
+
+□ Output Organization
+  ☐ outputs/ folder created
+  ☐ outputs/models/  for ML models
+  ☐ outputs/visualizations/ for plots
+  ☐ outputs/reports/ for summaries
+  ☐ Each subfolder has README.md
+
+□ Complete Documentation
+  ☐ All README files created and filled
+  ☐ Metadata files accompany datasets
+  ☐ Data sources documented
+  ☐ Scripts documented in README
+
+□ Reproducibility Verified
+  ☐ Can run scripts without errors
+  ☐ Scripts generate expected outputs
+  ☐ Processing is deterministic
+  ☐ Teammate can understand flow
+
+□ Video Content Ready
+  ☐ Project structure visible
+  ☐ Example files prepared
+  ☐ Scenario answer prepared
+  ☐ Equipment tested
+
+FINAL SIGN-OFF:
+
+I verify that my submission includes:
+
+_____ (initials) Raw data protection demonstrated
+_____ (initials) Processed data organization shown
+_____ (initials) Output artifacts properly organized
+_____ (initials) Complete documentation
+_____ (initials) Reproducible pipeline
+_____ (initials) Video recording complete
+
+Date: ________________
+
+Prepared for submission to:
+- GitHub PR: feature/milestone-8-data-organization
+- Branch: feature/milestone-8-data-organization
+- Video: Included in submission
+
+==========================================================================
+
+SCORING GUIDE FOR INSTRUCTOR/PEER REVIEW
+=========================================================================
+
+Part A: Raw Data Immutability (5 points)
+  ☐ 5 pts: Demonstrates complete understanding, can apply concept
+  ☐ 4 pts: Understands core concept with minor gaps
+  ☐ 3 pts: Basic understanding
+  ☐ 2 pts: Partial understanding
+  ☐ 1 pt: Minimal understanding
+  ☐ 0 pts: Does not understand
+
+Part B: Raw Data Folder (5 points)
+  ☐ 5 pts: Complete folder with all documentation
+  ☐ 4 pts: Folder exists, mostly documented
+  ☐ 3 pts: Folder exists, partially documented
+  ☐ 2 pts: Folder exists, minimal documentation
+  ☐ 1 pt: Folder exists, no documentation
+  ☐ 0 pts: No folder or severely lacking
+
+Part C: Processed Data (10 points)
+  ☐ 10 pts: Clear naming, complete metadata, data dictionary
+  ☐ 8 pts: Clear naming, metadata present, mostly documented
+  ☐ 6 pts: Naming acceptable, some metadata
+  ☐ 4 pts: Naming unclear, minimal metadata
+  ☐ 2 pts: Poor organization
+  ☐ 0 pts: No organization
+
+Part D: Separation of Concerns (15 points)
+  ☐ 15 pts: Perfect separation - raw/processed/outputs distinct
+  ☐ 12 pts: Strong separation with minor mixing
+  ☐ 9 pts: Adequate separation
+  ☐ 6 pts: Partial separation
+  ☐ 3 pts: Minimal separation
+  ☐ 0 pts: No separation
+
+Part E: Documentation (15 points)
+  ☐ 15 pts: Comprehensive, all files documented
+  ☐ 12 pts: Most documentation present
+  ☐ 9 pts: Adequate documentation
+  ☐ 6 pts: Basic documentation
+  ☐ 3 pts: Minimal documentation
+  ☐ 0 pts: No documentation
+
+Part F-G: Organization & Naming (10 points)
+  ☐ 10 pts: Consistent, clear naming throughout
+  ☐ 8 pts: Mostly consistent
+  ☐ 6 pts: Adequate consistency
+  ☐ 4 pts: Some inconsistency
+  ☐ 2 pts: Inconsistent naming
+  ☐ 0 pts: Random or no convention
+
+Part H-I: Git Integration & Reproducibility (10 points)
+  ☐ 10 pts: Perfect reproducibility, clean git workflow
+  ☐ 8 pts: Good reproducibility with minor issues
+  ☐ 6 pts: Adequate reproducibility
+  ☐ 4 pts: Reproducible with effort
+  ☐ 2 pts: Difficult to reproduce
+  ☐ 0 pts: Not reproducible
+
+Part J: Common Mistakes Identification (10 points)
+  ☐ 10 pts: Identifies and corrects all 6 mistakes
+  ☐ 8 pts: Identifies 5 mistakes correctly
+  ☐ 6 pts: Identifies 4 mistakes correctly
+  ☐ 4 pts: Identifies 3 mistakes correctly
+  ☐ 2 pts: Identifies 2 mistakes correctly
+  ☐ 0 pts: Cannot identify mistakes
+
+Part K: Video Quality (10 points)
+  ☐ 10 pts: Clear explanation, ~2 minutes, answers scenario
+  ☐ 8 pts: Good explanation, timing okay
+  ☐ 6 pts: Adequate explanation
+  ☐ 4 pts: Basic explanation with gaps
+  ☐ 2 pts: Incomplete explanation
+  ☐ 0 pts: No video or incomprehensible
+
+TOTAL POSSIBLE POINTS: 100
+
+Scoring Breakdown:
+  90-100: Excellent - Ready for production
+  80-89:  Good - With minor refinements
+  70-79:  Satisfactory - With improvements
+  60-69:  Needs work - Additional learning needed
+  < 60:   Does not meet standards
+
+FEEDBACK FOR LEARNER:
+_________________________________________________________________
+_________________________________________________________________
+_________________________________________________________________
+
+===========================================================================
+END OF CHECKLIST
+===========================================================================
+
+Key Takeaway:
+Data organization is not about rules for their own sake.
+It's about enabling your team (and future you) to:
+  ✓ Understand the data
+  ✓ Trust the data
+  ✓ Reproduce your work
+  ✓ Build on your work
+  ✓ Avoid costly mistakes
+
+Perfect data organization is:
+  3 simple folders (raw, processed, outputs)
+  ✓ Clear file names
+  ✓ Complete documentation
+  ✓ Reproducible scripts
+  ✓ Traceable lineage
+
+Nothing more needed!
