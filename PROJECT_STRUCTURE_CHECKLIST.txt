@@ -1,0 +1,528 @@
+PROJECT STRUCTURE CHECKLIST
+===========================
+
+Milestone 7: Creating a Project Folder Structure for Data Science Work
+Comprehensive verification guide for project organization best practices
+
+============================================================================
+PART A: KNOWLEDGE ASSESSMENT
+============================================================================
+
+☐ I understand why project structure matters
+  - Improves team collaboration
+  - Enables reproducible analysis
+  - Facilitates code reuse
+  - Looks professional
+
+☐ I can explain the principle of separation of concerns
+  - Raw data is separate from processed data
+  - Code is separate from data
+  - Generated outputs are separate from source data
+
+☐ I know which folders are immutable vs. generated
+  - IMMUTABLE: data/raw/
+  - GENERATED: data/processed/, outputs/
+
+☐ I understand naming conventions for folders
+  - Lowercase with underscores
+  - Singular for data folders (data/, not datas/)
+  - Plural for collections (notebooks/, outputs/)
+
+☐ I can identify what data belongs where
+  - Raw data in data/raw/
+  - Processed data in data/processed/
+  - Reference data in data/external/
+
+☐ I know the difference between notebooks and scripts
+  - Notebooks: Exploration and prototyping
+  - Scripts: Reusable, production-ready code
+
+☐ I understand the purpose of outputs folder
+  - Models: Trained models
+  - Visualizations: Charts and plots
+  - Reports: Analysis summaries
+
+☐ I can explain why raw data should never be modified
+  - Preserves reproducibility
+  - Provides audit trail
+  - Safe backup
+
+============================================================================
+PART B: FOLDER STRUCTURE VERIFICATION
+============================================================================
+
+ROOT LEVEL:
+☐ Project has a descriptive root folder name
+  Example: sales-prediction-project/ (NOT project_v2/)
+
+☐ Root folder contains README.md
+☐ Root folder contains .gitignore
+☐ Root folder contains clear, lowercase folder names
+☐ No unnecessary files in root directory
+
+REQUIRED FOLDERS - TIER 1 (Basic):
+☐ data/ folder exists
+☐ notebooks/ folder exists
+☐ outputs/ folder exists
+☐ All folders at same directory level
+
+REQUIRED FOLDERS - TIER 2 (Standard):
+☐ data/raw/ subfolder exists
+☐ data/processed/ subfolder exists
+☐ outputs/models/ subfolder exists
+☐ outputs/visualizations/ subfolder exists
+☐ outputs/reports/ subfolder exists
+☐ scripts/ folder exists
+☐ configs/ folder exists
+☐ docs/ folder exists (recommended)
+
+OPTIONAL FOLDERS - TIER 3 (Advanced):
+☐ data/external/ for reference data
+☐ tests/ for unit tests
+☐ logs/ for application logs
+
+============================================================================
+PART C: DATA FOLDER VERIFICATION
+============================================================================
+
+data/raw/:
+☐ Contains ONLY original, unmodified source data
+☐ Has README.md explaining data sources
+☐ No cleaned or processed versions here
+☐ No transformation scripts modify files here
+☐ Data preserved exactly as received
+
+data/processed/:
+☐ Contains cleaned, analysis-ready data
+☐ Files named with transformation info
+  Example: sales_cleaned_duplicates_removed.csv
+☐ Has README.md documenting processing steps
+☐ Does NOT contain raw data
+☐ Does NOT contain temporary files
+
+data/external/ (if exists):
+☐ Contains reference data (lookup tables, calendars)
+☐ Properly labeled and sourced
+☐ Documented in README.md
+
+============================================================================
+PART D: CODE ORGANIZATION VERIFICATION
+============================================================================
+
+notebooks/:
+☐ Uses numbered prefix naming convention
+  Format: 01_exploratory_analysis.ipynb
+  ✓ (01_, 02_, 03_)
+  ✗ (analysis.ipynb, analysis_v2.ipynb, final.ipynb)
+
+☐ No more than one version of each analysis
+  ✗ AVOID: 01_eda.ipynb, 01_eda_v2.ipynb, 01_final.ipynb
+  ✓ USE: 01_eda.ipynb (improve in place, use git)
+
+☐ Each notebook has a clear, descriptive title
+  ✓ 01_exploratory_analysis_customer_data.ipynb
+  ✗ 01_analysis.ipynb, 01_notes.ipynb
+
+☐ Notebooks contain Markdown and Code cells
+☐ Code cells are focused, not 1000+ lines
+
+scripts/:
+☐ Contains reusable Python functions
+☐ Functions have docstrings
+☐ One purpose per file when practical
+  ✓ data_cleaning.py, feature_engineering.py
+  ✗ main_script.py (does everything)
+
+☐ Functions are imported in notebooks
+  NOT copy-pasted across notebooks
+
+☐ Function names are descriptive
+  ✓ remove_duplicates(), engineer_features()
+  ✗ clean(), process()
+
+☐ Imports organized: stdlib → third-party → local
+
+============================================================================
+PART E: OUTPUTS FOLDER VERIFICATION
+============================================================================
+
+outputs/models/:
+☐ Contains serialized model files (.pkl, .h5, .joblib)
+☐ Model files have descriptive names
+  ✓ model_random_forest_tuned.pkl
+  ✗ model.pkl, model_v2.pkl
+
+☐ Includes model metadata if applicable
+☐ Does NOT contain notebooks or data
+
+outputs/visualizations/:
+☐ Contains generated plots (.png, .pdf, .svg)
+☐ Plot files have descriptive names
+  ✓ correlation_heatmap_features.png
+  ✗ plot1.png, chart.png
+
+☐ All plots generated by code (not manually created)
+☐ High resolution for publication (dpi ≥ 300)
+
+outputs/reports/:
+☐ Contains analysis summaries
+☐ HTML/PDF reports or CSV exports
+☐ Files named specifically for content
+  ✓ model_performance_report.html
+  ✗ report.html
+
+☐ Reports are professional and clear
+
+============================================================================
+PART F: CONFIGURATION AND DOCUMENTATION
+============================================================================
+
+configs/:
+☐ Contains configuration files (YAML/JSON)
+☐ Includes major configuration types
+  ☐ data_config.yaml (data sources)
+  ☐ model_config.yaml (hyperparameters)
+  ☐ feature_config.yaml (feature definitions)
+
+☐ Configuration files are tracked in git
+☐ Sensitive data (passwords, keys) in .env (NOT tracked)
+
+docs/:
+☐ Contains documentation files
+☐ Includes data_dictionary.md
+  ☐ Describes every column
+  ☐ Explains data types
+  ☐ Documents missing values
+
+.gitignore:
+☐ Exists in root directory
+☐ Ignores large generated files (*.pkl, *.png)
+☐ Ignores processed data
+☐ Ignores environment files (.env)
+☐ Does NOT ignore scripts/ or configs/ or notebooks/
+☐ Does NOT ignore data/raw/
+
+README.md:
+☐ Exists in root directory
+☐ Explains project purpose
+☐ Shows folder structure diagram
+☐ Includes quick start instructions
+☐ References where to find data and outputs
+☐ Explains how to run analysis
+
+============================================================================
+PART G: NAMING CONVENTIONS VERIFICATION
+============================================================================
+
+Folder names:
+☐ All lowercase
+☐ Use underscores for spaces (not hyphens/spaces)
+☐ Singular for data folders (.../sales_data/data/, not datas/)
+☐ Plural for collections (...outputs/, not output/)
+☐ Descriptive words
+  ✓ customer_segments/, processed_data/
+  ✗ data2/, proj_files/, new_folder/
+
+File names:
+☐ Descriptive and specific
+  ✓ sales_data_2024_cleaned.csv
+  ✗ data.csv, file001.csv
+
+☐ Include what was done when applicable
+  ✓ customer_data_duplicates_removed.csv
+  ✗ data_processed.csv
+
+☐ For notebooks: numbered prefix (01_, 02_, 03_)
+  ✓ 01_exploratory_analysis.ipynb
+  ✗ analysis.ipynb, eda_v2.ipynb
+
+☐ For models: include model type and status
+  ✓ model_linear_regression_baseline.pkl
+  ✗ model.pkl, model_final.pkl
+
+============================================================================
+PART H: SEPARATION OF CONCERNS VERIFICATION
+============================================================================
+
+☐ Raw and processed data in different folders
+☐ Exploratory code (notebooks) separate from production code (scripts)
+☐ Generated outputs separate from source data
+☐ Configuration separate from code
+☐ Documentation separate from analysis code
+
+☐ Raw data NEVER modified
+☐ Scripts are NEVER run directly in notebooks
+  (Functions imported from scripts instead)
+
+☐ Processed data ALWAYS generated from raw data
+  NOT manually edited or stored
+
+☐ Outputs ALWAYS generated by code
+  NOT manually created or stored
+
+============================================================================
+PART I: COLLABORATION AND SCALABILITY
+============================================================================
+
+☐ A new team member can understand project in 2 minutes
+☐ Folder purposes are self-explanatory
+☐ READMEs explain why structure exists
+☐ Anyone can find where data is stored
+☐ Anyone can find where outputs are saved
+☐ Anyone can locate and run analysis code
+
+☐ Structure is consistent across multiple projects
+☐ Scale from small to large datasets
+☐ Easy to add collaborators
+☐ Easy to add new analysis phases
+☐ No data loss if folders reorganized
+
+============================================================================
+PART J: VERSION CONTROL INTEGRATION
+============================================================================
+
+☐ .gitignore exists and is comprehensive
+☐ Large generated files are ignored
+  ☐ *.pkl (models)
+  ☐ *.png (visualizations)
+  ☐ *.pdf (reports)
+
+☐ All code is committed (scripts/, notebooks/)
+☐ All configuration is committed (configs/)
+☐ All documentation is committed (docs/, README.md)
+☐ Raw data is committed OR documented in README
+☐ Processed data is NOT committed
+☐ Generated outputs are NOT committed
+
+☐ Git history is clean and meaningful
+☐ No accidental large files in git
+☐ No passwords or secrets in git
+
+============================================================================
+PART K: COMMON MISTAKES CHECKLIST
+============================================================================
+
+❌ AVOID: Mixing raw and processed data
+   ✓ Instead: Separate into data/raw/ and data/processed/
+
+❌ AVOID: Multiple notebook versions (v1, v2, final)
+   ✓ Instead: Single current version, use git history
+
+❌ AVOID: Code duplicated across notebooks
+   ✓ Instead: Extract to scripts/, import in notebooks
+
+❌ AVOID: Everything in one folder
+   ✓ Instead: Logical separation (data/, notebooks/, outputs/)
+
+❌ AVOID: Unclear folder names
+   ✓ Instead: Descriptive, lowercase, underscores
+
+❌ AVOID: Outputs stored in data/ folder
+   ✓ Instead: outputs/ folder with subfolders
+
+❌ AVOID: No documentation
+   ✓ Instead: README.md and data_dictionary.md
+
+❌ AVOID: Storing secrets in code
+   ✓ Instead: Environment variables or .env files
+
+❌ AVOID: No .gitignore
+   ✓ Instead: .gitignore excludes large files
+
+❌ AVOID: Hardcoded file paths in scripts
+   ✓ Instead: Configuration files or function parameters
+
+============================================================================
+PART L: SELF-ASSESSMENT
+============================================================================
+
+Knowledge & Understanding:
+☐ I can explain why project structure matters
+☐ I can describe separation of concerns principle
+☐ I understand immutability of raw data
+☐ I know common naming conventions
+☐ I can identify mistakes in disorganized projects
+
+Practical Skills:
+☐ I can create proper folder structure
+☐ I can organize data correctly
+☐ I can structure notebooks with clear sequence
+☐ I can extract functions to reusable scripts
+☐ I can name files descriptively
+
+Professional Practice:
+☐ My projects look professional and organized
+☐ I document my project structure clearly
+☐ I maintain consistency across projects
+☐ I follow industry best practices
+☐ I can explain decisions to team members
+
+Collaboration:
+☐ A teammate can navigate my project easily
+☐ Structure is self-explanatory
+☐ Documentation supports understanding
+☐ Easy to extend or modify analysis
+☐ Facilitates knowledge sharing
+
+============================================================================
+PART M: FINAL VERIFICATION CHECKLIST
+============================================================================
+
+Project Structure Complete:
+☐ Root folder with project name
+☐ data/raw/ with source data
+☐ data/processed/ for cleaned data
+☐ notebooks/ with numbered analysis files
+☐ scripts/ with reusable code
+☐ outputs/ with subfolders (models, visualizations, reports)
+☐ configs/ with configuration files
+☐ docs/ with documentation
+☐ README.md at root level
+☐ .gitignore at root level
+
+Quality Checks:
+☐ All folder names are lowercase with underscores
+☐ All file names are descriptive and clear
+☐ README explains purpose of each folder
+☐ data_dictionary.md documents data (if applicable)
+☐ No unnecessary files scattered around
+☐ No duplicate notebooks or scripts
+☐ Raw data protected from modification
+
+Ready for Submission:
+☐ Structure demonstrates professional organization
+☐ Follows industry best practices
+☐ Easy for teammates to understand and navigate
+☐ Scalable for project growth
+☐ Prepared for video walkthrough
+
+============================================================================
+PART N: VIDEO DEMONSTRATION REQUIREMENTS
+============================================================================
+
+Video must include:
+
+1. Project Overview (Duration: ~20 seconds)
+   ☐ Show root folder
+   ☐ Explain project purpose
+   ☐ Point out main folder structure
+
+2. Folder Breakdown (Duration: ~50 seconds)
+   ☐ Navigate to each major folder
+   ☐ Briefly explain purpose of each
+   ☐ Point out key files/subfolders
+
+3. Data Organization (Duration: ~35 seconds)
+   ☐ Show data/raw/ - explain immutability
+   ☐ Show data/processed/ - explain transformation
+   ☐ Point out README in data folders
+
+4. Code Organization (Duration: ~35 seconds)
+   ☐ Show notebooks/ - explain naming and purpose
+   ☐ Show scripts/ - explain reusability
+   ☐ Compare notebook vs. script structure
+
+5. Outputs (Duration: ~15 seconds)
+   ☐ Show outputs/ structure
+   ☐ Explain models/, visualizations/, reports/
+
+6. Scenario-Based Reasoning (Duration: ~25 seconds)
+   ☐ Answer: How does structure prevent confusion?
+   ☐ Reference specific folders and naming
+   ☐ Explain collaboration benefits
+
+TOTAL DURATION: ~2 minutes (acceptable: 1:50 to 2:10)
+
+Key Points to Mention in Video:
+☐ Separation of concerns
+☐ Immutability of raw data
+☐ Clear naming conventions
+☐ Consistency and scalability
+☐ Collaboration and reusability
+☐ Why structure matters
+
+============================================================================
+PART O: SUBMISSION READINESS
+============================================================================
+
+PR Preparation:
+☐ All project structure files created and organized
+☐ Sample project demonstrates best practices
+☐ All README files explain their folders
+☐ .gitignore is comprehensive
+☐ Repository is clean (no extra files)
+
+Video Preparation:
+☐ Screen recording tool ready
+☐ Microphone tested
+☐ Project structure ready to demonstrate
+☐ Script prepared with timing
+☐ Practice run completed
+☐ Video is ~2 minutes (±10 seconds acceptable)
+
+Submission:
+☐ PR created with project structure
+☐ Video walkthrough recorded
+☐ Video uploaded to shareable platform
+☐ Video link tested (works in private browser)
+☐ PR comments include video link and description
+
+============================================================================
+SCORING GUIDE
+============================================================================
+
+Full Credit (90-100%):
+✓ Professional, well-organized project structure
+✓ All required folders present and properly purposed
+✓ Excellent naming conventions throughout
+✓ Comprehensive documentation (README, data_dictionary)
+✓ Clear separation of concerns
+✓ Video demonstrates all aspects clearly
+✓ Scenario answer is thorough and insightful
+
+Proficient (80-89%):
+✓ Good project structure with most elements
+✓ Required folders present
+✓ Mostly good naming conventions
+✓ Documentation present
+✓ Clear demonstration in video
+✓ Scenario answer is adequate
+
+Developing (70-79%):
+✓ Basic project structure
+✓ Main folders present
+✓ Some naming issues
+✓ Minimal documentation
+✓ Video covers main points
+✓ Scenario answer is brief
+
+Below Standard (Below 70%):
+✗ Incomplete or unclear structure
+✗ Missing key folders
+✗ Inconsistent naming
+✗ Insufficient documentation
+✗ Video doesn't demonstrate concepts clearly
+✗ Scenario answer is vague or incorrect
+
+============================================================================
+SIGN-OFF
+============================================================================
+
+Self-Assessment:
+☐ I have reviewed this checklist completely
+☐ My project structure passes all quality checks
+☐ I am confident in my demonstration
+☐ I am ready for video recording
+
+Ready to Proceed:
+☐ YES, I have completed all preparation
+☐ NO, I need to revise (see which items are unchecked)
+
+Revision Needed For:
+___________________________________________________________________________
+___________________________________________________________________________
+___________________________________________________________________________
+
+Date Completed: ________________
+
+Milestone 7: Project Structure = ☐ READY FOR SUBMISSION
