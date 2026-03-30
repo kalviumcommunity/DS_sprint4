@@ -1,0 +1,115 @@
+JUPYTER NOTEBOOK LAUNCH CHECKLIST - MILESTONE 3
+================================================
+
+BEFORE LAUNCHING JUPYTER
+=======================
+
+[ ] All previous milestones complete (Python, Conda, Jupyter installed)
+[ ] Project folder exists: c:\sprint-4-ds-lifecycle
+[ ] Created subdirectories:
+    [ ] notebooks/ folder exists
+    [ ] data/ folder exists
+    [ ] scripts/ folder exists
+
+LAUNCHING JUPYTER
+================
+
+Step 1: Open PowerShell/Terminal
+  [ ] PowerShell window open
+
+Step 2: Navigate to project directory
+  [ ] Command: cd c:\sprint-4-ds-lifecycle
+  [ ] Verify location: pwd (should show c:\sprint-4-ds-lifecycle)
+
+Step 3: Verify project files
+  [ ] Command: dir (should show notebooks/, data/, scripts/ folders)
+
+Step 4: Launch Jupyter
+  [ ] Command: jupyter notebook
+  [ ] Wait for browser to open automatically
+  [ ] Browser shows: localhost:8888
+  [ ] Home interface displays project files
+
+JUPYTER HOME INTERFACE VERIFICATION
+===================================
+
+[ ] Breadcrumb shows: /c:/sprint-4-ds-lifecycle
+[ ] Can see notebooks/ folder
+[ ] Can see data/ folder
+[ ] Can see scripts/ folder
+[ ] Files list matches project structure
+
+CREATING A NOTEBOOK IN CORRECT LOCATION
+=======================================
+
+[ ] In Jupyter browser, click on notebooks/ folder
+[ ] Breadcrumb changes to: /c:.../notebooks
+[ ] Click "New" -> "Python 3"
+[ ] Notebook opens in new tab
+[ ] File is created inside notebooks/ folder (not at root!)
+
+TESTING NOTEBOOK EXECUTION
+==========================
+
+In first cell of notebook:
+[ ] Type: print("Hello from Jupyter!")
+[ ] Execute cell (Shift+Enter or click Run)
+[ ] Output appears below cell
+[ ] Notebook runs without errors
+
+TESTING FILE PATH AWARENESS
+===========================
+
+In a new cell, type:
+[ ] import os
+    os.getcwd()
+[ ] Output should show: c:\sprint-4-ds-lifecycle (or Windows equivalent)
+[ ] This confirms Jupyter knows the correct working directory
+
+IN SECOND NOTEBOOK CELL
+===========================
+
+[ ] type: os.listdir('.')
+[ ] Should see: notebooks/, data/, scripts/ listed
+[ ] This proves notebook can find project folders
+
+SAVING NOTEBOOK WITH CORRECT NAME
+==================================
+
+[ ] Right-click notebook name in file browser
+[ ] Rename to: 01-project-workspace-test.ipynb
+[ ] Verify file appears with new name in notebooks/ folder
+
+VIDEO RECORDING VERIFICATION
+=============================
+
+Before recording video, verify these are visible/doable:
+[ ] All commands run without errors
+[ ] Browser opens when launching Jupyter
+[ ] Home interface clear to navigate
+[ ] Notebook creates in correct folder
+[ ] Python cells execute successfully
+[ ] Working directory outputs correctly
+
+FINAL CHECKLIST BEFORE PR SUBMISSION
+====================================
+
+[ ] Notebook created in notebooks/ folder (not root)
+[ ] Notebook named: 01-project-workspace-test.ipynb
+[ ] Sample notebook (project-notebook-sample.ipynb) in notebooks/
+[ ] All Python cells in both notebooks execute successfully
+[ ] Working directory is correct (c:\sprint-4-ds-lifecycle)
+[ ] Documentation files created:
+    [ ] JUPYTER_HOME_INTERFACE_GUIDE.md
+    [ ] JUPYTER_LAUNCH_CHECKLIST.txt
+    [ ] MILESTONE-3-VIDEO-GUIDE.md
+[ ] Video script prepared and timed (~2 min)
+
+MILESTONE 3 STATUS
+==================
+
+Documentation: ✅ Ready
+Sample notebooks: ✅ Ready
+Video guide: ✅ Ready (next step)
+Video recorded: ⏳ Pending
+Video submitted: ⏳ Pending
