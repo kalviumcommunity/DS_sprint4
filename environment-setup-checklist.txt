@@ -1,0 +1,36 @@
+ENVIRONMENT SETUP CHECKLIST - DS SPRINT 4
+==========================================
+
+PHASE 1: PYTHON INSTALLATION
+[ ] Python downloaded
+[ ] Python installed
+[ ] "Add to PATH" checked during installation
+[ ] Verified: python --version (output shows version)
+[ ] Python terminal access confirmed
+
+PHASE 2: ANACONDA INSTALLATION
+[ ] Anaconda downloaded from https://www.anaconda.com/download
+[ ] Anaconda installer run
+[ ] "Add Anaconda to PATH" checked during installation
+[ ] PowerShell/Terminal restarted
+[ ] Verified: conda --version (output shows version)
+
+PHASE 3: VERIFICATION & TESTING
+[ ] Command: python --version ✓
+[ ] Command: conda --version ✓
+[ ] Command: pip --version ✓
+[ ] Test: python -c "import sys; print(sys.executable)" ✓
+[ ] Test: conda info ✓
+
+PHASE 4: READY FOR DS SPRINT
+[ ] Environment is consistent across team
+[ ] No installation errors reported
+[ ] Ready to create virtual environment
+[ ] Ready to install data science libraries (pandas, numpy, etc.)
+
+NOTES:
+- Keep this checklist updated as you complete each step
+- If any step fails, note the error and troubleshoot
+- Share completed checklist as proof of setup in PR
+
+STATUS: IN PROGRESS ⏳
