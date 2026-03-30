@@ -1,0 +1,368 @@
+================================================================================
+KERNEL MANAGEMENT VERIFICATION CHECKLIST
+Milestone 5: Running, Restarting, and Interrupting Jupyter Kernels
+================================================================================
+
+PROJECT: DS_sprint4
+BRANCH: feature/milestone-5-kernel-management
+DUE: As specified in course schedule
+
+================================================================================
+PART A: KNOWLEDGE ASSESSMENT
+================================================================================
+
+[ ] Understand what a Jupyter kernel is
+    - The kernel is a Python interpreter running in the background
+    - The notebook is a frontend interface to the kernel
+    - Kernel maintains memory/state between cell executions
+
+[ ] Understand kernel state and persistence
+    - Variables defined in Cell 1 are accessible in Cell 5
+    - Deleting a cell from the notebook doesn't clear its variables from kernel memory
+    - Restarting the kernel clears ALL variables
+
+[ ] Know the difference between interrupt and restart
+    - Interrupt (Ctrl+C): Stops current cell, keeps other variables
+    - Restart (Kernel → Restart): Clears all variables, starts fresh
+
+[ ] Understand execution order importance
+    - Cells should run top-to-bottom (Cell 1 → Cell 2 → ... → Cell N)
+    - Running Cell 5 only (skipping Cell 1-4) may fail if Cell 5 depends on earlier setup
+    - Professional notebooks don't have hidden dependencies
+
+[ ] Know the reproducibility test
+    - "Restart & Run All" means: Restart kernel, then execute all cells
+    - If this works, notebook is reproducible for anyone
+    - Essential before sharing/submitting
+
+================================================================================
+PART B: SETUP VERIFICATION
+================================================================================
+
+[ ] Notebook created: notebooks/05-kernel-management-demo.ipynb
+    - File exists in correct location
+    - File is valid Jupyter format (.ipynb)
+    - Opens without errors in VS Code Jupyter or Jupyter Notebook
+
+[ ] Guide created: KERNEL_MANAGEMENT_GUIDE.md
+    - File exists in project root
+    - Contains 10+ sections covering concepts
+    - Includes practical examples and before/after comparisons
+
+[ ] Checklist created: KERNEL_MANAGEMENT_CHECKLIST.txt
+    - This file, comprehensive verification guide
+
+================================================================================
+PART C: NOTEBOOK EXECUTION TESTS
+================================================================================
+
+PRE-FLIGHT: Verify notebook structure
+[ ] Notebook has at least 3 code cells
+[ ] Notebook has at least 3 markdown cells
+[ ] Cells follow Markdown-Code pattern (explanation before execution)
+[ ] Total cells: [ ] 8+ cells (good), [ ] 5-7 cells (acceptable), [ ] fewer (review)
+
+TEST 1: Run Cells in Order (Normal Execution)
+[ ] Open notebook: notebooks/05-kernel-management-demo.ipynb
+[ ] Start fresh kernel (don't run any cells yet)
+[ ] Run Cell 1 (imports and configuration)
+    - [ ] No errors occur
+    - [ ] Output shows "✓ Cell 1 Complete"
+[ ] Run Cell 2 (create data)
+    - [ ] No errors occur
+    - [ ] Cell 2 can access variables from Cell 1 (PROJECT_NAME, VERSION)
+    - [ ] Output shows "✓ Cell 2 Complete"
+[ ] Run Cell 3 (process data)
+    - [ ] No errors occur
+    - [ ] Uses 'dataset' created in Cell 2
+    - [ ] Output shows "✓ Cell 3 Complete"
+[ ] Run Cell 4 (verify state persistence)
+    - [ ] Shows variables from Cell 1, 2, 3 are all accessible
+    - [ ] Output confirms: "All variables are accessible!"
+[ ] Continue through Cell 8
+    - [ ] All cells execute without NameError or other errors
+    - [ ] Outputs are logical and sequential
+
+TEST 2: Interrupt Demonstration
+[ ] Find the long-running cell (should be ~100 iterations with time.sleep)
+[ ] Run this cell
+    - [ ] Cell starts executing (shows "Processing iteration 1...")
+    - [ ] Let it run for 2-3 iterations
+    - [ ] Press Ctrl+C or click Stop button (⏹)
+    - [ ] Cell stops immediately (doesn't complete all 100 iterations)
+    - [ ] Kernel remains responsive (no crash)
+[ ] Run the next cell without restarting
+    - [ ] Next cell runs successfully
+    - [ ] Shows that variables from interrupted cell still exist
+    - [ ] Example: "interrupt_count" variable is still accessible
+[ ] Conclusion: Interruption preserves kernel state ✓
+
+TEST 3: Restart Demonstration
+[ ] With all variables in kernel memory, restart kernel
+    - [ ] Menu: Kernel → Restart Kernel
+    - [ ] Confirm restart dialog
+    - [ ] Observe: All outputs stay visible in notebook, but kernel clears
+[ ] Run the "Cell 7: Verify state after restart" cell
+    - [ ] Cell tries to access PROJECT_NAME → Shows NameError or "not defined"
+    - [ ] Cell tries to access total_records → Shows NameError or "not defined"
+    - [ ] Cell tries to access dataset → Shows NameError or "not defined"
+    - [ ] Conclusion displayed: "All kernel memory has been cleared!" ✓
+[ ] This demonstrates restart clears variables ✓
+
+TEST 4: Restore State and Reproducibility
+[ ] After restart, run: Kernel → Run All Cells
+    - [ ] All cells execute in order from Cell 1 to Cell N
+    - [ ] No errors occur during full run
+    - [ ] Each cell produces expected output
+[ ] Look for the "REPRODUCIBILITY CHECK" cell (usually near end)
+    - [ ] Should show multiple checkmarks (✓) for each variable
+    - [ ] Should display: "✓ ALL CHECKS PASSED!"
+    - [ ] Should state: "This notebook is reproducible and works from scratch."
+[ ] Second reproducibility test: Restart kernel again and re-run all cells
+    - [ ] Repeat "Kernel → Restart Kernel"
+    - [ ] Repeat "Kernel → Run All Cells"
+    - [ ] Same outputs as before ✓
+    - [ ] Confirms consistency and reproducibility ✓
+
+TEST 5: Execution Order Dependency
+[ ] Skip Cell 1 and try to run Cell 4
+    - [ ] Expected: Error (PROJECT_NAME not defined)
+    - [ ] This shows Cell 4 depends on Cell 1
+    - [ ] Documents proper execution order required
+[ ] Restart kernel and run cells in order
+    - [ ] Cell 4 works when run after Cell 1-3
+    - [ ] Confirms dependency is documented and real
+
+================================================================================
+PART D: DOCUMENTATION QUALITY
+================================================================================
+
+KERNEL_MANAGEMENT_GUIDE.md Content Review
+[ ] Section: "What is a Jupyter Kernel?" - Clear explanation ✓
+[ ] Section: "Kernel State and Memory" - Includes examples ✓
+[ ] Section: "Running Cells Intentionally" - Shows methods (Ctrl+Enter, etc.) ✓
+[ ] Section: "Interrupting Execution" - Different approaches ✓
+[ ] Section: "Restarting the Kernel" - Scenarios and options ✓
+[ ] Section: "Best Practices" - 7+ actionable best practices ✓
+[ ] Section: "Common Mistakes" - 5+ real-world mistakes with fixes ✓
+[ ] Section: "Scenario Analysis" - Undefined variable problem explained ✓
+[ ] Examples provided: [ ] Code snippets, [ ] Comparisons (Good vs Bad), [ ] Workflow diagrams
+[ ] Checklist included: Pre-submission checklist visible ✓
+
+Notebook Documentation Quality
+[ ] Markdown cells explain concepts clearly
+[ ] Comments in code cells describe what's happening
+[ ] Output messages are informative (uses print with ✓ and ✗)
+[ ] Progression is logical: Setup → Demo → Interrupt → Restart → Verify
+[ ] Instructions are clear on what user should do at each step
+
+================================================================================
+PART E: VIDEO WALKTHROUGH REQUIREMENTS
+================================================================================
+
+Video must be approximately 2 minutes and demonstrate:
+
+Segment 1: Normal Execution (35 seconds)
+[ ] Open notebook in Jupyter or VS Code
+[ ] Show notebook structure (multiple cells, mix of markdown and code)
+[ ] Run Cell 1 → Cell 2 → Cell 3 in order
+    - [ ] Clearly explain: "Cell 1 sets up, Cell 2 uses it, Cell 3 uses both"
+[ ] Refer to output showing progression
+
+Segment 2: Interrupt Demonstration (50 seconds)
+[ ] Find and run the long-running cell
+- [ ] After 2-3 iterations, press Ctrl+C (or click Stop)
+    - [ ] Clearly show where the Stop button is
+    - [ ] Explain: "I'm interrupting this cell because it's slow"
+[ ] Run next cell to verify kernel still has variables
+    - [ ] Show variables are still accessible after interrupt
+    - [ ] Explain: "Interrupting doesn't clear kernel memory, just stops execution"
+
+Segment 3: Restart and Recover (25 seconds)
+[ ] Show Kernel menu → Restart Kernel
+    - [ ] Execute the restart
+    - [ ] Explain: "I'm restarting the kernel to clear all variables"
+[ ] Run the "verify after restart" cell
+    - [ ] Show NameError for previously defined variables
+    - [ ] Explain: "See how all variables are gone after restart?"
+[ ] Then "Run All Cells" and show it works again
+    - [ ] Briefly run a subset or use fast-forward
+    - [ ] Explain: "Running all cells from the top restores everything"
+
+Scenario-Based Reasoning (Mandatory in Video) (10 seconds)
+[ ] Answer this scenario verbally:
+    "A notebook works on your machine, but when someone else opens it and runs all cells, 
+    it fails with undefined variable errors. What kernel-related mistake likely caused this, 
+    and how would restarting and rerunning cells help prevent it?"
+
+[ ] Your answer should reference:
+    - [ ] Explanation of hidden kernel state
+    - [ ] Mention execution order was skipped
+    - [ ] Reference to "Run All Cells" best practice
+    - [ ] How restart prevents this in future work
+
+Scenario Example Answer:
+"The mistake was that I ran cells out of order on my machine. I ran Cell 5 before Cell 2,
+but Cell 5 depends on Cell 2. On my machine, Cell 2 was already run earlier, so Cell 5 worked.
+But when my colleague ran the notebook, they ran cells in order, so Cell 5 failed before Cell 2.
+By testing with 'Run All Cells' after a kernel restart, I would have caught this and fixed it."
+
+Video Quality Checklist
+[ ] Video is screen-facing and clearly visible
+[ ] Audio is clear and understandable
+[ ] Timing is approximately 2 minutes (±10 seconds)
+[ ] Screen resolution is readable (at least 1280x720)
+[ ] You speak clearly and explain each action
+[ ] No background noise or distractions (optional but recommended)
+
+================================================================================
+PART F: SUBMISSION READINESS
+================================================================================
+
+Files Ready for PR
+[ ] KERNEL_MANAGEMENT_GUIDE.md - Created and complete
+[ ] notebooks/05-kernel-management-demo.ipynb - Created and tested
+[ ] KERNEL_MANAGEMENT_CHECKLIST.txt - This file, comprehensive
+[ ] MILESTONE-5-VIDEO-GUIDE.md - Exact script and timing (create next)
+[ ] MILESTONE-5-COMPLETION-GUIDE.md - Submission instructions (create next)
+
+Git Preparation
+[ ] Current directory: C:\sprint-4-ds-lifecycle (or your workspace root)
+[ ] Git status shows clean working directory (no uncommitted changes)
+[ ] Remote "origin" points to: github.com/kalviumcommunity/DS_sprint4
+
+Branch Creation Checklist
+[ ] Branch name: feature/milestone-5-kernel-management
+[ ] Branch created from: add-ds-lifecycle-doc (base branch)
+[ ] No merge conflicts with main
+[ ] All files committed:
+    - [ ] KERNEL_MANAGEMENT_GUIDE.md
+    - [ ] notebooks/05-kernel-management-demo.ipynb
+    - [ ] KERNEL_MANAGEMENT_CHECKLIST.txt
+    - [ ] MILESTONE-5-VIDEO-GUIDE.md
+    - [ ] MILESTONE-5-COMPLETION-GUIDE.md
+
+PR Link (will be generated)
+[ ] PR created at: https://github.com/kalviumcommunity/DS_sprint4/pull/new/feature/milestone-5-kernel-management
+[ ] PR title: "Milestone 5: Kernel Control and Reproducibility"
+[ ] PR description includes: Notebook demonstrates running, interrupting, restarting kernels
+[ ] Add video link in PR comments
+
+Video Link (for submission)
+[ ] Video file recorded and saved
+[ ] Video format: MP4, WebM, MOV, or other platform-compatible format
+[ ] Video name: MILESTONE-5-KERNEL-MANAGEMENT-VIDEO.[ext]
+[ ] Video uploaded to: [platform - Google Drive, YouTube, GitHub, etc.]
+[ ] Video link ready: [shared link with view permissions]
+
+================================================================================
+PART G: SELF-ASSESSMENT
+================================================================================
+
+Knowledge Assessment
+[ ] I can explain what a kernel is in 1-2 sentences
+[ ] I can describe 3 reasons why kernel state matters
+[ ] I understand when to interrupt vs restart
+[ ] I know how to test reproducibility
+
+Skill Assessment
+[ ] I can run cells in intentional order and verify dependencies
+[ ] I can interrupt a long-running cell without losing variables
+[ ] I can restart the kernel and clear all state
+[ ] I can demonstrate "Run All Cells" working from scratch
+[ ] I can explain the undefined variable scenario from personal understanding
+
+Notebook Quality
+[ ] My notebook is organized and easy to follow
+[ ] My notebook demonstrates all required concepts
+[ ] My notebook includes clear instructions for the user
+[ ] My notebook passes all execution tests
+
+Documentation Quality
+[ ] My guide is comprehensive and well-organized
+[ ] My guide explains concepts at appropriate depth
+[ ] My guide includes examples and best practices
+[ ] My guide helps solve real-world problems
+
+Video Quality
+[ ] My video is clear and well-paced
+[ ] My video demonstrates all key concepts
+[ ] My video answers the scenario question thoroughly
+[ ] My video is approximately 2 minutes
+
+================================================================================
+PART H: COMMON ISSUES AND FIXES
+================================================================================
+
+Issue: "Cell shows an error about a variable not being defined"
+Solution: 
+  1. Verify you ran the cell that defines the variable
+  2. Check the cell number where variable is defined
+  3. Ensure cells run in order (Cell 1 → Cell 2 → ...)
+  4. Try "Kernel → Run All Cells" to run everything in order
+  5. If still broken, restart kernel and rerun all cells
+
+Issue: "My interrupt doesn't work (cell keeps running)"
+Solution:
+  1. Verify the cell has a pause (time.sleep) or long loop
+  2. Try Ctrl+C in terminal (not the notebook button)
+  3. Try clicking the Stop button (⏹) in the notebook toolbar
+  4. If neither works, restart the kernel
+  5. Always test interrupt with the provided demo cell first
+
+Issue: "After restart, I can't find my variables"
+Solution:
+  1. This is expected! Restart clears memory
+  2. To restore, run all cells from Cell 1: "Kernel → Run All Cells"
+  3. Or manually run cells in order
+  4. Check the "Reproducibility Check" section to verify all variables restored
+
+Issue: "My notebook has hidden dependencies I didn't realize"
+Solution:
+  1. Restart the kernel first (clears all memory)
+  2. Then try "Kernel → Run All Cells"
+  3. Any cell that fails reveals a dependency
+  4. Fix by moving setup code earlier or adding comments
+  5. Test again until all cells pass from scratch
+
+Issue: "The video walkthrough is too long or too short"
+Solution:
+  Target 2 minutes ± 10 seconds:
+  - If too long: Skip complex explanations, use fast-forward
+  - If too short: Add more detail to scenario answer, slow down slightly
+  - Use the provided MILESTONE-5-VIDEO-GUIDE.md script as timing reference
+
+================================================================================
+FINAL VERIFICATION CHECKLIST
+================================================================================
+
+Before submission, verify:
+[ ] All 5 files created and committed to feature/milestone-5-kernel-management
+[ ] Notebook executes all cells without errors
+[ ] "Run All Cells" works from a fresh kernel restart
+[ ] Interrupt demonstration works cleanly
+[ ] Restart demonstration shows memory cleared
+[ ] Reproducibility check passes
+[ ] Video is approximately 2 minutes
+[ ] Video covers normal execution, interrupt, restart, and scenario
+[ ] Scenario answer references kernel state and execution order
+[ ] PR link ready
+[ ] Video link ready
+[ ] All documentation is clear and complete
+
+SUBMISSION READY: [ ] YES  [ ] NO
+
+If NO, identify what needs fixing:
+_________________________________________________________________________
+_________________________________________________________________________
+_________________________________________________________________________
+
+================================================================================
+NOTES
+
+- Keep this checklist for reference during video recording
+- Use MILESTONE-5-VIDEO-GUIDE.md for exact timing and script
+- Reach out to instructor if you have questions about concepts
+- Remember: The goal is demonstrating kernel control, not complex code
+
+================================================================================
