@@ -1,0 +1,478 @@
+================================================================================
+MARKDOWN USAGE VERIFICATION CHECKLIST
+Milestone 6: Writing Markdown for Headings, Lists, and Code Blocks
+================================================================================
+
+PROJECT: DS_sprint4
+BRANCH: feature/milestone-6-markdown-documentation
+DUE: As specified in course schedule
+
+================================================================================
+PART A: KNOWLEDGE ASSESSMENT
+================================================================================
+
+[ ] Understand Markdown syntax basics
+    - Markdown is text formatting that renders as styled output
+    - Backticks create monospace code formatting
+    - Triple backticks create code blocks
+
+[ ] Know the six heading levels
+    - # is Level 1 (main title)
+    - ## is Level 2 (major section)
+    - ### is Level 3 (subsection)
+    - Don't skip levels (don't go from # to ###)
+
+[ ] Understand when to use ordered lists
+    - Use when order matters or showing steps
+    - Use for procedures, workflows, processes
+
+[ ] Understand when to use unordered lists
+    - Use when order doesn't matter
+    - Use for features, requirements, options, requirements
+
+[ ] Know inline code vs code blocks
+    - Inline: `single backticks` for short code in text
+    - Blocks: triple backticks for multi-line examples
+
+[ ] Understand Markdown placement strategy
+    - Markdown cell BEFORE code cell explains what will happen
+    - Markdown cell AFTER code cell explains results/meaning
+    - Professional pattern: Markdown → Code → Markdown
+
+[ ] Know why documentation matters
+    - Helps readers understand notebook purpose and flow
+    - Makes notebooks collaborative and maintainable
+    - Professional presentation of analysis
+
+================================================================================
+PART B: NOTEBOOK STRUCTURE VERIFICATION
+================================================================================
+
+Notebook File: notebooks/06-markdown-documentation-demo.ipynb
+
+[ ] File exists and is valid Jupyter notebook (.ipynb)
+[ ] Notebook opens without errors in VS Code or Jupyter
+[ ] Notebook has clear title (# Heading Level 1)
+
+CONTENT STRUCTURE CHECK:
+
+[ ] Top Section: Title Cell (Markdown)
+    - Main title using #
+    - Brief description of content
+    - Mention of Markdown elements demonstrated
+
+[ ] Navigation Section: Table of Contents (Markdown, optional but professional)
+    - Lists major sections
+    - Uses links or simple navigation
+
+[ ] Introduction Section: Overview (Markdown)
+    - Problem or purpose statement
+    - Data overview if applicable
+    - What will be demonstrated
+
+[ ] Data Setup Section: Preparation steps
+    - [ ] Markdown cell explaining what will be done
+    - [ ] Code cell implementing setup
+    - [ ] Markdown cell explaining what happened
+
+[ ] Analysis Section(s): Main content (minimum 2-3 sections)
+    - [ ] Each section starts with Markdown heading
+    - [ ] Markdown explains purpose before code
+    - [ ] Code cell implements analysis
+    - [ ] Markdown cell explains results
+
+[ ] Results Section: Summary and findings
+    - [ ] Markdown summarizes key findings
+    - [ ] Results clearly presented
+    - [ ] Recommendations or next steps
+
+[ ] Conclusion Section: Wrap-up
+    - [ ] Summary of what was demonstrated
+    - [ ] Markdown techniques used called out
+
+================================================================================
+PART C: MARKDOWN ELEMENTS CHECK
+================================================================================
+
+HEADINGS VERIFICATION:
+
+[ ] Main title uses # (Level 1) - appears once at top
+[ ] Major sections use ## (Level 2) - 3+ major sections visible
+[ ] Subsections use ### (Level 3) - at least 2-3 subsections under sections
+[ ] Heading hierarchy is logical and consistent
+[ ] No levels are skipped (goes #, ##, ### not # then ###)
+
+LISTS VERIFICATION:
+
+Required: At least one ordered list AND one unordered list
+
+ORDERED LIST (numbered):
+[ ] At least one ordered list exists
+[ ] Look for: 1. item, 2. item, 3. item format
+[ ] Used appropriately for sequential steps or processes
+[ ] Example locations to find: "Steps to", "Process:", "Methodology:"
+
+UNORDERED LIST (bullets):
+[ ] At least one unordered list exists
+[ ] Look for: - item or * item format
+[ ] Used appropriately for options, features, or non-sequential items
+[ ] Example locations to find: "Features", "Requirements:", "Includes:"
+
+[ ] Lists are nested where appropriate (sub-bullets show detail)
+[ ] At least one combined list (ordered + unordered) is preferred
+
+CODE FORMATTING VERIFICATION:
+
+INLINE CODE (backticks):
+[ ] At least 5+ instances of inline code exist
+[ ] Format is correct: `variable_name`, `function_name()`, `parameter=value`
+[ ] Used for:
+    - [ ] Variable names (`, `df`, `x`, `my_list`)
+    - [ ] Function names (`, `print()`, `len()`)
+    - [ ] File paths (`, `data/file.csv`)
+    - [ ] Parameters (, `header=0`, `sep=','`)
+    - [ ] Keywords (, `True`, `False`, `None`)
+
+CODE BLOCKS (triple backticks):
+[ ] At least one code block exists in a Markdown cell (not executable)
+[ ] Code block uses proper formatting with triple backticks
+[ ] Language specified after opening backticks (```python)
+[ ] Code block is used to SHOW example code, not primary implementation
+[ ] Code block is preceded by Markdown explaining what it shows
+
+================================================================================
+PART D: MARKDOWN PLACEMENT & FLOW
+================================================================================
+
+THE MARKDOWN-CODE-MARKDOWN PATTERN:
+
+Test this pattern at least 2 times in the notebook:
+
+Pattern Test 1:
+[ ] Markdown cell: Explains what will happen (purpose)
+[ ] Code cell: Implements the functionality
+[ ] Markdown cell: Explains what the output means (interpretation)
+
+Pattern Test 2:
+[ ] Markdown cell: Explains next step or purpose
+[ ] Code cell: Executes code
+[ ] Markdown cell: Explains results or transition
+
+READABILITY TEST:
+
+[ ] Read just the Markdown cells (ignore code cells)
+    - Can you understand the notebook's flow?
+    - Do you know what each section is about?
+    - Result: Should be able to follow the story
+
+[ ] Read just the code cells (ignore Markdown)
+    - Is code understandable without Markdown?
+    - Are there comments explaining non-obvious lines?
+    - Result: Code should be readable but Markdown enhances it
+
+[ ] Scroll through entire notebook
+    - Does the notebook look well-organized?
+    - Are there clear section breaks?
+    - Is there good balance between Markdown and code?
+    - Result: Should see a professional, structured document
+
+================================================================================
+PART E: DOCUMENTATION QUALITY
+================================================================================
+
+GUIDE CONTENT QUALITY (check MARKDOWN_USAGE_GUIDE.md):
+
+[ ] Guide explains what Markdown is (definition and purpose)
+[ ] Guide shows six heading levels (# through ######)
+[ ] Guide explains when to use ordered vs unordered lists
+[ ] Guide demonstrates inline code and code blocks
+[ ] Guide shows the Markdown-Code-Markdown pattern
+[ ] Guide includes examples of common mistakes
+[ ] Guide includes "before and after" comparisons
+[ ] Guide explains why good documentation matters
+
+NOTEBOOK DOCUMENTATION QUALITY:
+
+[ ] Title cell clearly describes what notebook demonstrates
+[ ] Each major section explains its purpose in Markdown
+[ ] Complex code steps have Markdown explanations
+[ ] Results are interpreted in Markdown after code execution
+[ ] Section transitions are clear
+[ ] Heading names are descriptive and meaningful
+[ ] Lists are used to break down complex ideas
+[ ] Inline code helps readers identify key variables
+
+================================================================================
+PART F: EXECUTION VERIFICATION
+================================================================================
+
+NOTEBOOK EXECUTION:
+
+[ ] Open notebook in Jupyter or VS Code Jupyter extension
+[ ] Run all cells (Kernel → Run All Cells)
+    - [ ] No errors occur
+    - [ ] All code cells execute successfully
+    - [ ] Outputs display correctly
+    - [ ] No undefined variable errors
+
+[ ] Restart kernel and run all cells again
+    - [ ] Same results as first run
+    - [ ] Confirms reproducibility
+    - [ ] All cells still execute successfully
+
+[ ] Verify cell execution order
+    - [ ] Cells show [1], [2], [3]... in sequence
+    - [ ] No cells show [ ] (unexecuted) unexpectedly
+
+MARKDOWN RENDERING:
+
+[ ] Open notebook in GitHub.com (if possible)
+    - [ ] Markdown renders correctly
+    - [ ] Headings appear as formatted headers
+    - [ ] Lists are properly indented and bulleted
+    - [ ] Inline code appears in monospace
+    - [ ] Code blocks show syntax highlighting
+
+[ ] Check on multiple platforms:
+    - [ ] VS Code Notebook preview (if available)
+    - [ ] Jupyter Notebook web interface
+    - [ ] GitHub web preview (if repository is public)
+
+================================================================================
+PART G: VIDEO WALKTHROUGH REQUIREMENTS
+================================================================================
+
+Video must be approximately 2 minutes and demonstrate:
+
+Segment 1: Markdown Overview (35 seconds)
+[ ] Open notebook in Jupyter or VS Code  
+[ ] Show notebook structure (multiple Markdown cells visible)
+[ ] Point out: Markdown cells contain text/formatting
+[ ] Point out: Code cells contain Python code
+[ ] Explain: Markdown explains, code executes
+
+Segment 2: Headings and Organization (35 seconds)
+[ ] Scroll through notebook to show heading levels
+[ ] Show main title (# Level 1)
+[ ] Show major sections (## Level 2)
+[ ] Show subsections (### Level 3)
+[ ] Explain: Headings help readers understand structure
+[ ] Point out: Professional hierarchy # → ## → ###
+
+Segment 3: Lists and Code Formatting (35 seconds)
+[ ] Show an ordered list in Markdown cell
+    - [ ] Explain: Used for steps that must happen in order
+[ ] Show an unordered list in Markdown cell
+    - [ ] Explain: Used for items without required order
+[ ] Show inline code examples (backticks)
+    - [ ] Point to variables like `df`, `grade`
+    - [ ] Point to functions like `pd.read_csv()`
+[ ] Show a code block in Markdown
+    - [ ] Explain: This is example code (not executed directly)
+
+Segment 4: Markdown-Code-Markdown Pattern (10 seconds)
+[ ] Show a sequence: Markdown → Code → Markdown
+[ ] Explain: Markdown explains purpose, code runs, Markdown explains results
+[ ] Show one or two examples of this pattern
+
+Scenario-Based Reasoning (Mandatory in Video) (5 seconds)
+[ ] Answer this scenario:
+    "A teammate opens your notebook and says the code works, but they cannot 
+    understand what the notebook is doing or why certain steps exist. 
+    What documentation mistakes likely caused this, and how would better 
+    Markdown usage fix the problem?"
+
+[ ] Your answer should reference:
+    - [ ] Mention headings help organize sections
+    - [ ] Mention explanatory text before and after code
+    - [ ] Mention lists break down complex procedures
+    - [ ] Mention code formatting (inline and blocks)
+    - [ ] Reference readability for collaborators
+
+VIDEO TIMING:
+- Segment 1: 35 seconds
+- Segment 2: 35 seconds  
+- Segment 3: 35 seconds
+- Segment 4: 10 seconds
+- Scenario: 5 seconds
+- **Total: Approximately 2 minutes (±10 seconds)**
+
+VIDEO QUALITY:
+[ ] Screen is clear and readable (1280x720 or higher)
+[ ] Audio is clear and audible
+[ ] Pacing is conversational (not too fast, not too slow)
+[ ] Microphone captures your voice clearly
+[ ] No background noise or distracting sounds
+
+================================================================================
+PART H: SUBMISSION READINESS
+================================================================================
+
+Files Ready for PR:
+[ ] MARKDOWN_USAGE_GUIDE.md - Comprehensive reference guide
+[ ] notebooks/06-markdown-documentation-demo.ipynb - Sample notebook
+[ ] MARKDOWN_USAGE_CHECKLIST.txt - This verification file
+[ ] MILESTONE-6-VIDEO-GUIDE.md - Exact script and timing
+[ ] MILESTONE-6-COMPLETION-GUIDE.md - Submission instructions
+
+Git Preparation:
+[ ] Current working directory is the project root
+[ ] Git status is clean (no uncommitted changes from other milestones)
+[ ] Remote "origin" configured correctly
+[ ] Base branch "add-ds-lifecycle-doc" exists and is accessible
+
+Branch Creation:
+[ ] Ready to create: feature/milestone-6-markdown-documentation
+[ ] All 5 files will be added to this branch
+[ ] Each file will be committed with descriptive message
+[ ] Branch will be pushed to remote
+
+PR Link (will be generated):
+[ ] PR will be available at: 
+    https://github.com/kalviumcommunity/DS_sprint4/pull/new/feature/milestone-6-markdown-documentation
+
+Video Link (for submission):
+[ ] Video recorded and saved as file
+[ ] Video format: MP4, MOV, WebM, or other platform-compatible format
+[ ] Video uploaded to shareable platform (Google Drive, YouTube, etc.)
+[ ] Shareable link obtained
+
+================================================================================
+PART I: COMMON ISSUES AND FIXES
+================================================================================
+
+Issue: "I don't have enough lists in my notebook"
+Solution:
+  - Review the guide: places where lists should go include
+    - Requirements or features (unordered)
+    - Steps in a process (ordered)
+    - Verification criteria (unordered)
+  - Break up complex explanations into bulleted lists
+  - Add at least one ordered list and one unordered list
+
+Issue: "My code block doesn't show syntax highlighting"
+Solution:
+  - Verify triple backticks: ``` (not two or four)
+  - Specify language: ```python (not ```Python or missing)
+  - Test in different platforms (GitHub, Jupyter, VS Code)
+
+Issue: "Headings appear, but hierarchy seems wrong"
+Solution:
+  - Count the # symbols (# is level 1, ## is level 2, ### is level 3)
+  - Verify no levels are skipped (don't jump from # to ###)
+  - Ensure parallel concepts use the same level
+
+Issue: "I'm not sure where inline code is needed"
+Solution:
+  - Use backticks for: variables (`x`), functions (`print()`), parameters (`sep=','`)
+  - Don't use for: regular words, complete sentences with code
+  - Rule of thumb: If it's Python syntax, use backticks
+
+Issue: "Video is running too long"
+Solution:
+  - Target: 2 minutes ±10 seconds (acceptable range: 1:50-2:10)
+  - If too long: reduce explanation detail or speak faster
+  - If too short: add more detail to scenario answer
+  - Use script timing as reference
+
+Issue: "Scenario answer doesn't mention Markdown techniques"
+Solution:
+  - Reference at least 2 of: headings, lists, inline code, code blocks
+  - Connect to the problem: "Without headings, readers couldn't find sections"
+  - Explain the fix: "Better Markdown would add clear headings and explanations"
+
+================================================================================
+PART J: SELF-ASSESSMENT
+================================================================================
+
+Knowledge Assessment:
+[ ] I can explain what Markdown is and why it matters
+[ ] I can describe the six heading levels and proper hierarchy
+[ ] I understand when to use ordered vs unordered lists
+[ ] I know the difference between inline code and code blocks
+[ ] I understand the Markdown-Code-Markdown pattern
+
+Skill Assessment:
+[ ] I can create a well-organized Markdown structure in a notebook
+[ ] I can use heading hierarchy correctly (# → ## → ###)
+[ ] I can write ordered lists for sequential steps
+[ ] I can write unordered lists for non-sequential items
+[ ] I can use inline code correctly in explanations
+[ ] I can create code blocks with syntax highlighting
+[ ] I can place Markdown strategically before and after code cells
+
+Documentation Quality:
+[ ] My notebook is well-organized and easy to follow
+[ ] My notebook demonstrates all required Markdown elements
+[ ] My Markdown explains the purpose of each step
+[ ] My code is readable with helpful inline comments
+[ ] A new reader can understand my notebook's flow
+
+Video Quality:
+[ ] My video shows the notebook clearly
+[ ] My video demonstrates all Markdown elements
+[ ] My video explains the Markdown-Code-Markdown pattern
+[ ] My scenario answer references specific Markdown techniques
+[ ] My video timing is approximately 2 minutes
+
+================================================================================
+PART K: FINAL CHECKLIST
+================================================================================
+
+Before submission, verify:
+
+CONTENT COMPLETION:
+[ ] Notebook has 3+ major sections (##)
+[ ] Notebook has 3+ subsections (###)
+[ ] Notebook demonstrates 5+ inline code instances
+[ ] Notebook has at least 1 ordered list
+[ ] Notebook has at least 1 unordered list
+[ ] Notebook has at least 1 code block in Markdown
+[ ] Notebook follows Markdown-Code-Markdown pattern at least 2x
+[ ] Notebook has introduction, analysis, and results sections
+
+TECHNICAL QUALITY:
+[ ] Notebook executes without errors (Run All Cells succeeds)
+[ ] Notebook reproduces same results after kernel restart
+[ ] Markdown renders correctly in GitHub
+[ ] All code cells show proper execution numbers [1], [2], etc.
+[ ] No undefined variable errors or missing imports
+
+DOCUMENTATION QUALITY:
+[ ] Guide file is comprehensive (1000+ words)
+[ ] Guide includes examples and before/after comparisons
+[ ] Guide explains all Markdown concepts needed
+[ ] Notebook demonstrates all guide concepts
+[ ] Checklist is thorough and helpful
+[ ] Video guide has exact script and timing
+
+VIDEO REQUIREMENTS:
+[ ] Video is recorded (not just planned)
+[ ] Video is approximately 2 minutes
+[ ] Video shows all required elements
+[ ] Video includes scenario answer
+[ ] Video is accessible (link works and is shareable)
+
+GIT PREPARATION:
+[ ] All files added and staged
+[ ] Commit message is descriptive
+[ ] Branch is created and ready
+[ ] Ready to push to remote
+
+SUBMISSION READY: [ ] YES  [ ] NO
+
+If NO, identify what needs to be completed:
+_________________________________________________________________________
+_________________________________________________________________________
+_________________________________________________________________________
+
+================================================================================
+NOTES
+
+- Use this checklist while creating notebook content
+- Reference MARKDOWN_USAGE_GUIDE.md frequently
+- Test notebook execution multiple times
+- Test video timing before final submission
+- Reach out to instructor if concepts are unclear
+
+================================================================================
