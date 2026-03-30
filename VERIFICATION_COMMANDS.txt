@@ -1,0 +1,122 @@
+ENVIRONMENT VERIFICATION - QUICK COMMAND REFERENCE
+===================================================
+
+PYTHON VERIFICATION
+==================
+
+Check Python Version:
+  python --version
+
+Check Python Location:
+  python -c "import sys; print(sys.executable)"
+
+Check Platform:
+  python -c "import platform; print(platform.platform())"
+
+Test Python Execution:
+  python -c "print('Python works!')"
+
+
+CONDA VERIFICATION
+================
+
+Check Conda Version:
+  conda --version
+
+Get Conda Info:
+  conda info
+
+List Conda Environments:
+  conda env list
+
+Activate Base Environment:
+  conda activate base
+
+Create Test Environment:
+  conda create -n ds-test python=3.11 -y
+
+Activate Test Environment:
+  conda activate ds-test
+
+Deactivate Environment:
+  conda deactivate
+
+Remove Test Environment:
+  conda remove -n ds-test --all -y
+
+
+JUPYTER VERIFICATION
+===================
+
+Check Jupyter Version:
+  jupyter --version
+
+Launch Jupyter Notebook:
+  jupyter notebook
+
+Launch JupyterLab:
+  jupyter lab
+
+Install Jupyter (if needed):
+  conda install jupyter -y
+  OR
+  pip install jupyter
+
+Stop Jupyter:
+  Press Ctrl+C in terminal
+
+
+ENVIRONMENT STATUS CHECK
+=======================
+
+Full Environment Report:
+  python --version
+  conda --version
+  jupyter --version
+  conda activate base
+
+Check Installed Packages:
+  pip list
+  OR
+  conda list
+
+Verify Key Libraries:
+  python -c "import numpy; print('NumPy:', numpy.__version__)"
+  python -c "import pandas; print('Pandas:', pandas.__version__)"
+  python -c "import matplotlib; print('Matplotlib:', matplotlib.__version__)"
+
+
+TROUBLESHOOTING COMMANDS
+=======================
+
+If Conda not found:
+  - Restart PowerShell/Terminal after installing Anaconda
+  - Add Anaconda to PATH manually
+
+If Jupyter not found:
+  - Install with: conda install jupyter -y
+
+If Jupyter won't open browser:
+  - Manually go to: http://localhost:8888
+  - Check for token in terminal output
+
+Verify Current Environment:
+  conda info
+  which python  (Mac/Linux)
+  where python  (Windows)
+
+
+MILESTONE 2 VERIFICATION CHECKLIST
+=================================
+
+[ ] Python version check: python --version
+[ ] Conda version check: conda --version
+[ ] Conda environment activation: conda activate base
+[ ] Jupyter version check: jupyter --version
+[ ] Launch Jupyter: jupyter notebook
+[ ] Run sample Python cell in Jupyter
+[ ] Test all commands from this file
+[ ] Record video walkthrough
+[ ] Submit PR + Video
+
+STATUS: READY FOR VIDEO WALKTHROUGH ✅
