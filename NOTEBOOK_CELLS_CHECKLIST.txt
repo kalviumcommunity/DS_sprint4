@@ -1,0 +1,165 @@
+NOTEBOOK CELLS: CODE vs MARKDOWN - CHECKLIST
+==============================================
+
+UNDERSTANDING THE CONCEPTS
+==========================
+
+[ ] Understand Code cells run Python code
+[ ] Understand Markdown cells display formatted text
+[ ] Understand the difference between running and rendering
+[ ] Understand why separation matters for readability
+
+CREATING AND USING CODE CELLS
+=============================
+
+[ ] Launch Jupyter Notebook
+[ ] Create a new Code cell
+[ ] Type simple Python: print("Hello")
+[ ] Execute cell (Shift+Enter or Run button)
+[ ] Observe output below cell
+[ ] Create another code cell with: x = 5; y = 3; print(x + y)
+[ ] Execute and see result
+
+CREATING AND USING MARKDOWN CELLS
+=================================
+
+[ ] Create a new Markdown cell
+[ ] Type heading: # My Notebook
+[ ] Render cell (Shift+Enter)
+[ ] Observe heading formatting applied
+[ ] Create another Markdown cell
+[ ] Type bullet points:
+    - Point 1
+    - Point 2
+[ ] Render and see bullet format
+
+SWITCHING CELL TYPES
+====================
+
+[ ] Select a Code cell with Python code
+[ ] Find Cell menu or use dropdown
+[ ] Change cell type to Markdown
+[ ] Notice code now shows as text (won't run)
+[ ] Change it back to Code
+[ ] Code runs again
+
+[ ] Select a Markdown cell with text
+[ ] Change it to Code
+[ ] Notice text is now treated as Python
+[ ] Change back to Markdown
+
+NOTEBOOK STRUCTURE VERIFICATION
+===============================
+
+Review the sample notebook: 04-cell-types-demonstration.ipynb
+
+[ ] Markdown title at top
+[ ] Markdown explaining purpose
+[ ] Code cell with simple Python
+[ ] Markdown explaining what code did
+[ ] Another Code cell
+[ ] Markdown interpreting results
+[ ] More sections following same pattern
+[ ] All Code cells execute successfully
+[ ] All Markdown cells render properly
+
+IDENTIFYING BEST PRACTICES
+==========================
+
+In the sample notebook, find:
+
+[ ] At least 2 Markdown cells explaining Code cells above them
+[ ] At least 2 Code cells with executable Python
+[ ] Clear separation between explanation and logic
+[ ] Markdown using headings (## or ###)
+[ ] Markdown using bullet points or numbered lists
+[ ] Code cells that don't have comments (explanation in Markdown)
+[ ] Each Code cell is focused on one logical task
+
+TESTING YOUR UNDERSTANDING
+===========================
+
+Can you explain verbally:
+
+[ ] "When should I use a Code cell vs Markdown cell?"
+[ ] "Why is separating explanation from code better than using comments?"
+[ ] "What happens if I switch a Code cell to Markdown?"
+[ ] "How should I structure a notebook section?"
+
+PRACTICE: CREATE YOUR OWN SIMPLE STRUCTURE
+==========================================
+
+In the sample notebook, create a new section:
+
+[ ] Add Markdown: "## My Custom Section"
+[ ] Add Markdown: "Explaining what I'll do next"
+[ ] Add Code cell: x = 10; y = 20; print(f"Sum: {x+y}")
+[ ] Execute the Code cell
+[ ] Add Markdown: "The result shows the sum is correct"
+
+VERIFY CELL TYPES IN SAMPLE NOTEBOOK
+====================================
+
+Open: notebooks/04-cell-types-demonstration.ipynb
+
+Count Markdown cells:
+[ ] Cell 1: Title
+[ ] Cell 2-3: Introduction
+[ ] Cell 4: Section intro
+[ ] ... more sections
+[ ] Total Markdown cells: _____
+
+Count Code cells:
+[ ] Cell with print("Welcome...")
+[ ] Cell with library imports
+[ ] Cell creating DataFrame
+[ ] Cell calculating statistics
+[ ] Cell with final verification
+[ ] Total Code cells: _____
+
+Expected Markdown cells: 9-10
+Expected Code cells: 5-6
+
+VIDEO RECORDING READINESS
+=========================
+
+Before recording your video:
+
+[ ] Sample notebook opens without errors
+[ ] All Code cells execute successfully
+[ ] All Markdown cells render with formatting
+[ ] You can explain the difference between Code and Markdown
+[ ] You can demonstrate switching a cell type
+[ ] You can explain when to use each cell type
+[ ] You understand why structure matters
+[ ] You can describe the 3-cell rule (Markdown-Code-Markdown)
+
+FINAL CHECKLIST BEFORE PR SUBMISSION
+====================================
+
+[ ] Sample notebook created: 04-cell-types-demonstration.ipynb
+[ ] Located in: notebooks/ folder (correct location!)
+[ ] Markdown title at top
+[ ] At least 2 Markdown cells explaining upcoming Code
+[ ] At least 2 Code cells with Python
+[ ] Clear alignment between Markdown and Code
+[ ] All Code cells execute successfully
+[ ] No errors when running notebook
+[ ] Markdown uses formatting (headings, bullets)
+[ ] Code demonstrates Python basics (no data analysis)
+[ ] Professional structure demonstrated
+[ ] Documentation files created:
+    [ ] NOTEBOOK_CELLS_GUIDE.md
+    [ ] NOTEBOOK_CELLS_CHECKLIST.txt
+    [ ] MILESTONE-4-VIDEO-GUIDE.md
+[ ] Video script prepared
+
+MILESTONE 4 STATUS
+==================
+
+Documentation: ✅ Ready
+Sample notebook: ✅ Ready
+Checklist: ✅ Ready
+Video guide: ⏳ Next
+Video recorded: ⏳ Pending
+Video submitted: ⏳ Pending
