@@ -11,6 +11,20 @@ This folder contains standalone Python scripts that contain reusable functions e
 - Easy to maintain
 - Follow Python best practices
 
+## Milestone Example
+
+For a simple standalone script example, run:
+
+```powershell
+python scripts/first_data_analysis.py
+```
+
+This demonstrates:
+- A clearly named `.py` file
+- Top-to-bottom script execution
+- Basic variables and calculations
+- Console output for quick verification
+
 ## What Goes Here
 
 - **data_cleaning.py:** Functions for loading, validating, cleaning data
