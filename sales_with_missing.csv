@@ -1,0 +1,11 @@
+Date,Product,Quantity,Price,Total,Region,Discount
+2024-01-01,Laptop,5,1200,6000,North,0.05
+2024-01-02,Phone,12,800,,East,
+2024-01-03,Tablet,,400,3200,West,0.00
+2024-01-04,Monitor,15,,5250,South,0.10
+2024-01-05,Keyboard,25,100,,North,0.02
+2024-01-06,,8,600,4800,East,
+2024-01-07,Mouse,20,50,1000,,0.00
+2024-01-08,Desk,3,500,,North,
+2024-01-09,Chair,10,250,2500,West,0.05
+2024-01-10,Monitor,,,5250,,0.15
